@@ -1,0 +1,7 @@
+{
+  "BENIGN": 0,
+  "Bot": 1,
+  "DDoS": 2,
+  "Infiltration": 3,
+  "PortScan": 4
+}

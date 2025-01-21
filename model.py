@@ -11,6 +11,46 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from imblearn.over_sampling import SMOTE
 from imblearn.pipeline import Pipeline
+from sklearn.utils import resample
+
+def export_class_labels_json(label_map: Dict[str, int], filepath: str) -> None:
+    """
+    Exports the class label mapping (from label to numeric encoding) to a JSON file.
+    """
+    with open(filepath, 'w') as f:
+        json.dump(label_map, f, indent=2)
+    print(f"Class labels exported to {filepath}")
+
+def balance_classes_equal_samples(features: np.ndarray, labels: np.ndarray, n_samples_per_class: int = 20) -> Tuple[np.ndarray, np.ndarray]:
+    """
+    Balances the dataset by downsampling each class to have an equal number of samples (n_samples_per_class),
+    and shuffles the resulting dataset.
+    """
+    unique_labels = np.unique(labels)
+    balanced_features = []
+    balanced_labels = []
+    
+    for label in unique_labels:
+        # Get all the indices for the current label
+        class_indices = np.where(labels == label)[0]
+        
+        # Downsample to have n_samples_per_class for each class
+        sampled_indices = resample(class_indices, n_samples=n_samples_per_class, random_state=42)
+        
+        balanced_features.append(features[sampled_indices])
+        balanced_labels.append(labels[sampled_indices])
+    
+    # Concatenate all the balanced data
+    balanced_features = np.vstack(balanced_features)
+    balanced_labels = np.concatenate(balanced_labels)
+    
+    # Shuffle the dataset
+    shuffle_indices = np.random.permutation(balanced_features.shape[0])
+    balanced_features = balanced_features[shuffle_indices]
+    balanced_labels = balanced_labels[shuffle_indices]
+    
+    return balanced_features, balanced_labels
+
 
 def read_csv_to_ndarray(file_path: str) -> Tuple[np.ndarray, List[str], List[str]]:
     """
@@ -323,11 +363,23 @@ def main():
     
     print("Encoding labels...")
     encoded_labels, label_map = encode_labels(all_labels)
+
+    export_class_labels_json(label_map, "class_labels.json")
     
     print("\nSelecting top 5 features...")
     selected_features, selected_names, selected_indices = select_top_features(
         features, encoded_labels, all_feature_names
     )
+
+    # Balance dataset by equal sampling and shuffle
+    print("\nBalancing dataset by equal sampling of each class and shuffling...")
+    balanced_features, balanced_labels = balance_classes_equal_samples(features, encoded_labels, n_samples_per_class=20)
+    
+    # Save balanced and shuffled dataset to CSV
+    balanced_df = pd.DataFrame(balanced_features, columns=all_feature_names)
+    balanced_df['label'] = balanced_labels
+    balanced_df.to_csv("balanced_shuffled_dataset.csv", index=False)
+    print("Balanced and shuffled dataset saved to 'balanced_shuffled_dataset.csv'")
     
     # Perform cross-validation
     print("\nPerforming cross-validation...")
