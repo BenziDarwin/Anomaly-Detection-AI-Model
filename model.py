@@ -66,7 +66,7 @@ def read_csv_to_ndarray(file_path: str) -> Tuple[np.ndarray, List[str], List[str
     return features, labels, feature_names
 
 
-def select_top_features(features: np.ndarray, labels: np.ndarray, feature_names: List[str], n_features: int = 5) -> Tuple[np.ndarray, List[str], List[int]]:
+def select_top_features(features: np.ndarray, labels: np.ndarray, feature_names: List[str], n_features: int = 10) -> Tuple[np.ndarray, List[str], List[int]]:
     """
     Selects top N features based on importance scores using actual labels.
     """
@@ -82,7 +82,7 @@ def select_top_features(features: np.ndarray, labels: np.ndarray, feature_names:
     selected_features = features[:, top_indices]
     selected_names = [feature_names[i] for i in top_indices]
     
-    print("\nTop 5 features selected:")
+    print("\nTop 10 features selected:")
     for idx, (name, importance) in enumerate(zip(selected_names, importances[top_indices]), 1):
         print(f"{idx}. {name} (importance: {importance:.4f})")
     
@@ -245,16 +245,6 @@ def perform_cross_validation(features: np.ndarray, labels: np.ndarray, class_wei
     print(f"Mean Balanced Accuracy: {scores.mean():.4f} (+/- {scores.std() * 2:.4f})")
     print(f"Individual Fold Scores: {', '.join(f'{score:.4f}' for score in scores)}")
 
-
-def balance_dataset(features: np.ndarray, labels: np.ndarray) -> Tuple[np.ndarray, np.ndarray]:
-    """
-    Applies SMOTE to balance the dataset.
-    """
-    smote = SMOTE(random_state=42, sampling_strategy='auto')
-    X_resampled, y_resampled = smote.fit_resample(features, labels)
-    
-    return X_resampled, y_resampled
-
 def perform_cross_validation(features: np.ndarray, labels: np.ndarray, n_splits: int = 5) -> None:
     """
     Performs stratified k-fold cross-validation and prints results.
@@ -304,6 +294,53 @@ def analyze_feature_correlations(features: np.ndarray, feature_names: List[str],
         for feature, corr in high_corr_features.items():
             print(f"- {feature}: {corr:.4f}")
 
+def add_rows_with_smote(features: np.ndarray, labels: np.ndarray, n_samples: int) -> Tuple[np.ndarray, np.ndarray]:
+    """
+    Adds a specific number of synthetic samples to a dataset using SMOTE.
+    
+    Args:
+        features (np.ndarray): The feature matrix
+        labels (np.ndarray): The label array
+        n_samples (int): The number of synthetic samples to generate
+        
+    Returns:
+        Tuple[np.ndarray, np.ndarray]: Augmented features and labels arrays
+    """
+    # Get current class distribution
+    unique_labels, class_counts = np.unique(labels, return_counts=True)
+    n_classes = len(unique_labels)
+    
+    # Calculate how many samples to add per class (distribute evenly)
+    samples_per_class = n_samples // n_classes
+    remainder = n_samples % n_classes
+    
+    # Create sampling strategy dictionary
+    sampling_strategy = {}
+    for i, label in enumerate(unique_labels):
+        # Add remainder samples to first classes if needed
+        extra = 1 if i < remainder else 0
+        target_count = class_counts[i] + samples_per_class + extra
+        sampling_strategy[label] = target_count
+    
+    # Apply SMOTE with the custom sampling strategy
+    smote = SMOTE(random_state=42, sampling_strategy=sampling_strategy)
+    X_resampled, y_resampled = smote.fit_resample(features, labels)
+    
+    print(f"Added {X_resampled.shape[0] - features.shape[0]} synthetic samples using SMOTE")
+    print(f"Original shape: {features.shape}, New shape: {X_resampled.shape}")
+    
+    # Analyze the distribution before and after
+    print("\nClass Distribution - Before:")
+    for label, count in zip(unique_labels, class_counts):
+        print(f"Class {label}: {count} samples")
+    
+    # Get new distribution
+    new_unique, new_counts = np.unique(y_resampled, return_counts=True)
+    print("\nClass Distribution - After:")
+    for label, count in zip(new_unique, new_counts):
+        print(f"Class {label}: {count} samples")
+    
+    return X_resampled, y_resampled
 
 def print_classification_metrics(y_true: np.ndarray, y_pred: np.ndarray, label_map: Dict[str, int]) -> None:
     """
@@ -364,9 +401,39 @@ def main():
     print("Encoding labels...")
     encoded_labels, label_map = encode_labels(all_labels)
 
+    # Add synthetic samples using SMOTE only for Bot and Infiltration classes
+    print("\nAdding synthetic samples for Bot and Infiltration classes...")
+    
+    # 1. Extract only Bot (1) and Infiltration (3) samples
+    target_classes = [1, 3]  # Bot and Infiltration
+    target_mask = np.isin(encoded_labels, target_classes)
+    target_features = features[target_mask]
+    target_labels = encoded_labels[target_mask]
+    
+    # 2. Generate synthetic samples for just these classes
+    synthetic_features, synthetic_labels = add_rows_with_smote(
+        target_features, target_labels, n_samples=100000
+    )
+    
+    # 3. Get only the newly generated samples
+    original_count = len(target_labels)
+    new_samples_features = synthetic_features[original_count:]
+    new_samples_labels = synthetic_labels[original_count:]
+    
+    # 4. Add them back to the original dataset
+    features = np.vstack([features, new_samples_features])
+    encoded_labels = np.concatenate([encoded_labels, new_samples_labels])
+    
+    # Display final distribution
+    unique_final, counts_final = np.unique(encoded_labels, return_counts=True)
+    class_names = {v: k for k, v in label_map.items()}
+    print("\nFinal distribution after adding synthetic samples:")
+    for label, count in zip(unique_final, counts_final):
+        print(f"{class_names.get(label, f'Class {label}')}: {count} samples")
+
     export_class_labels_json(label_map, "class_labels.json")
     
-    print("\nSelecting top 5 features...")
+    print("\nSelecting top 10 features...")
     selected_features, selected_names, selected_indices = select_top_features(
         features, encoded_labels, all_feature_names
     )
@@ -417,7 +484,6 @@ def main():
     
     # Save confusion matrix
     save_confusion_matrix(y_test, predictions, filepath="confusion_matrix.png")
-
 
 if __name__ == "__main__":
     main()

@@ -1,30 +1,50 @@
 {
   "1.csv": {
     "0": "Total Length of Fwd Packets",
-    "1": " Bwd Packet Length Std",
-    "2": "Flow Bytes/s",
-    "3": " Subflow Bwd Packets",
-    "4": " act_data_pkt_fwd"
+    "1": "Flow Bytes/s",
+    "2": " Bwd Packet Length Std",
+    "3": " Active Min",
+    "4": " Subflow Bwd Packets",
+    "5": " Destination Port",
+    "6": " Init_Win_bytes_backward",
+    "7": "Init_Win_bytes_forward",
+    "8": " Packet Length Mean",
+    "9": " Min Packet Length"
   },
   "2.csv": {
     "0": "Total Length of Fwd Packets",
-    "1": " Bwd Packet Length Std",
-    "2": "Flow Bytes/s",
-    "3": " Subflow Bwd Packets",
-    "4": " act_data_pkt_fwd"
+    "1": "Flow Bytes/s",
+    "2": " Bwd Packet Length Std",
+    "3": " Active Min",
+    "4": " Subflow Bwd Packets",
+    "5": "2 Destination Port",
+    "6": " Init_Win_bytes_backward",
+    "7": "Init_Win_bytes_forward",
+    "8": " Packet Length Mean",
+    "9": " Min Packet Length"
   },
   "3.csv": {
     "0": "Total Length of Fwd Packets",
-    "1": " Bwd Packet Length Std",
-    "2": "Flow Bytes/s",
-    "3": " Subflow Bwd Packets",
-    "4": " act_data_pkt_fwd"
+    "1": "Flow Bytes/s",
+    "2": " Bwd Packet Length Std",
+    "3": " Active Min",
+    "4": " Subflow Bwd Packets",
+    "5": " Destination Port",
+    "6": " Init_Win_bytes_backward",
+    "7": "Init_Win_bytes_forward",
+    "8": " Packet Length Mean",
+    "9": " Min Packet Length"
   },
   "4.csv": {
     "0": "Total Length of Fwd Packets",
-    "1": " Bwd Packet Length Std",
-    "2": "Flow Bytes/s",
-    "3": " Subflow Bwd Packets",
-    "4": " act_data_pkt_fwd"
+    "1": "Flow Bytes/s",
+    "2": " Bwd Packet Length Std",
+    "3": " Active Min",
+    "4": " Subflow Bwd Packets",
+    "5": " Destination Port",
+    "6": " Init_Win_bytes_backward",
+    "7": "Init_Win_bytes_forward",
+    "8": " Packet Length Mean",
+    "9": " Min Packet Length"
   }
 }
