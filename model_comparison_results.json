@@ -1,0 +1,93 @@
+[
+  {
+    "model_name": "Decision Tree",
+    "model_type": "DecisionTreeClassifier",
+    "train_time": 3.7497525215148926,
+    "prediction_time": 0.02764272689819336,
+    "accuracy": 0.9896185373448734,
+    "precision_macro": 0.9913535018146886,
+    "recall_macro": 0.9727769234616863,
+    "f1_macro": 0.9818503226224792,
+    "precision_weighted": 0.9896488444699078,
+    "recall_weighted": 0.9896185373448734,
+    "f1_weighted": 0.9895551036454986
+  },
+  {
+    "model_name": "Random Forest",
+    "model_type": "RandomForestClassifier",
+    "train_time": 18.15064549446106,
+    "prediction_time": 0.28447914123535156,
+    "accuracy": 0.9946833356230251,
+    "precision_macro": 0.994232412532425,
+    "recall_macro": 0.9853563655328476,
+    "f1_macro": 0.9897099819486727,
+    "precision_weighted": 0.9946673301309806,
+    "recall_weighted": 0.9946833356230251,
+    "f1_weighted": 0.9946534868219539
+  },
+  {
+    "model_name": "Logistic Regression",
+    "model_type": "LogisticRegression",
+    "train_time": 121.46961212158203,
+    "prediction_time": 0.01308131217956543,
+    "accuracy": 0.7874295919769199,
+    "precision_macro": 0.8634881619965509,
+    "recall_macro": 0.5211774908793559,
+    "f1_macro": 0.5775876579161221,
+    "precision_weighted": 0.8019779874186721,
+    "recall_weighted": 0.7874295919769199,
+    "f1_weighted": 0.7566626397008244
+  },
+  {
+    "model_name": "K-Nearest Neighbors",
+    "model_type": "KNeighborsClassifier",
+    "train_time": 2.8237078189849854,
+    "prediction_time": 12.457931518554688,
+    "accuracy": 0.9716490360397491,
+    "precision_macro": 0.9585898294553852,
+    "recall_macro": 0.9692936691192292,
+    "f1_macro": 0.9637929180386443,
+    "precision_weighted": 0.972092901047262,
+    "recall_weighted": 0.9716490360397491,
+    "f1_weighted": 0.9717743741295696
+  },
+  {
+    "model_name": "Naive Bayes",
+    "model_type": "GaussianNB",
+    "train_time": 0.22420287132263184,
+    "prediction_time": 0.12123346328735352,
+    "accuracy": 0.34175481980125477,
+    "precision_macro": 0.5295320130689783,
+    "recall_macro": 0.5754492821949618,
+    "f1_macro": 0.4317821314789169,
+    "precision_weighted": 0.7556379528158282,
+    "recall_weighted": 0.34175481980125477,
+    "f1_weighted": 0.296065973129398
+  },
+  {
+    "model_name": "AdaBoost",
+    "model_type": "AdaBoostClassifier",
+    "train_time": 68.9292380809784,
+    "prediction_time": 1.8134098052978516,
+    "accuracy": 0.898282731144388,
+    "precision_macro": 0.9316425836959427,
+    "recall_macro": 0.7230017504771549,
+    "f1_macro": 0.7859720289529142,
+    "precision_weighted": 0.9034058555512996,
+    "recall_weighted": 0.898282731144388,
+    "f1_weighted": 0.8863643879548425
+  },
+  {
+    "model_name": "Neural Network",
+    "model_type": "MLPClassifier",
+    "train_time": 146.42720103263855,
+    "prediction_time": 0.17392492294311523,
+    "accuracy": 0.7774190593946055,
+    "precision_macro": 0.9063020773224583,
+    "recall_macro": 0.5244197818782699,
+    "f1_macro": 0.5662647450235416,
+    "precision_weighted": 0.810483519877602,
+    "recall_weighted": 0.7774190593946055,
+    "f1_weighted": 0.7065687248594105
+  }
+]
