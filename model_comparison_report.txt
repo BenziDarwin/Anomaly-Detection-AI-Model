@@ -6,13 +6,13 @@ PERFORMANCE SUMMARY (Sorted by accuracy)
 --------------------------------------------------------------------------------
 Rank  Model                    accuracy    F1-Macro    Train Time  Pred Time   
 --------------------------------------------------------------------------------
-1     Random Forest            0.9947      0.9897      18.15s      0.28s
-2     Decision Tree            0.9896      0.9819      3.75s      0.03s
-3     K-Nearest Neighbors      0.9716      0.9638      2.82s      12.46s
-4     AdaBoost                 0.8983      0.7860      68.93s      1.81s
-5     Logistic Regression      0.7874      0.5776      121.47s      0.01s
-6     Neural Network           0.7774      0.5663      146.43s      0.17s
-7     Naive Bayes              0.3418      0.4318      0.22s      0.12s
+1     Random Forest            0.9973      0.7892      21.04s      0.31s
+2     Decision Tree            0.9970      0.7887      6.67s      0.03s
+3     K-Nearest Neighbors      0.9813      0.7691      20.11s      5.51s
+4     Neural Network           0.9615      0.7951      1039.81s      0.45s
+5     AdaBoost                 0.9447      0.5447      156.46s      3.85s
+6     Logistic Regression      0.8675      0.4807      245.25s      0.03s
+7     Naive Bayes              0.3401      0.2350      4.68s      0.25s
 
 ================================================================================
 DETAILED METRICS
@@ -21,99 +21,99 @@ DETAILED METRICS
 1. Random Forest
 ----------------------------------------
    Model Type: RandomForestClassifier
-   accuracy: 0.9947
-   Precision (Macro): 0.9942
-   Recall (Macro): 0.9854
-   F1-Score (Macro): 0.9897
-   Precision (Weighted): 0.9947
-   Recall (Weighted): 0.9947
-   F1-Score (Weighted): 0.9947
-   Training Time: 18.15 seconds
-   Prediction Time: 0.28 seconds
+   accuracy: 0.9973
+   Precision (Macro): 0.9470
+   Recall (Macro): 0.7302
+   F1-Score (Macro): 0.7892
+   Precision (Weighted): 0.9973
+   Recall (Weighted): 0.9973
+   F1-Score (Weighted): 0.9970
+   Training Time: 21.04 seconds
+   Prediction Time: 0.31 seconds
 
 2. Decision Tree
 ----------------------------------------
    Model Type: DecisionTreeClassifier
-   accuracy: 0.9896
-   Precision (Macro): 0.9914
-   Recall (Macro): 0.9728
-   F1-Score (Macro): 0.9819
-   Precision (Weighted): 0.9896
-   Recall (Weighted): 0.9896
-   F1-Score (Weighted): 0.9896
-   Training Time: 3.75 seconds
+   accuracy: 0.9970
+   Precision (Macro): 0.9456
+   Recall (Macro): 0.7299
+   F1-Score (Macro): 0.7887
+   Precision (Weighted): 0.9970
+   Recall (Weighted): 0.9970
+   F1-Score (Weighted): 0.9967
+   Training Time: 6.67 seconds
    Prediction Time: 0.03 seconds
 
 3. K-Nearest Neighbors
 ----------------------------------------
    Model Type: KNeighborsClassifier
-   accuracy: 0.9716
-   Precision (Macro): 0.9586
-   Recall (Macro): 0.9693
-   F1-Score (Macro): 0.9638
-   Precision (Weighted): 0.9721
-   Recall (Weighted): 0.9716
-   F1-Score (Weighted): 0.9718
-   Training Time: 2.82 seconds
-   Prediction Time: 12.46 seconds
+   accuracy: 0.9813
+   Precision (Macro): 0.8632
+   Recall (Macro): 0.7358
+   F1-Score (Macro): 0.7691
+   Precision (Weighted): 0.9816
+   Recall (Weighted): 0.9813
+   F1-Score (Weighted): 0.9813
+   Training Time: 20.11 seconds
+   Prediction Time: 5.51 seconds
 
-4. AdaBoost
-----------------------------------------
-   Model Type: AdaBoostClassifier
-   accuracy: 0.8983
-   Precision (Macro): 0.9316
-   Recall (Macro): 0.7230
-   F1-Score (Macro): 0.7860
-   Precision (Weighted): 0.9034
-   Recall (Weighted): 0.8983
-   F1-Score (Weighted): 0.8864
-   Training Time: 68.93 seconds
-   Prediction Time: 1.81 seconds
-
-5. Logistic Regression
-----------------------------------------
-   Model Type: LogisticRegression
-   accuracy: 0.7874
-   Precision (Macro): 0.8635
-   Recall (Macro): 0.5212
-   F1-Score (Macro): 0.5776
-   Precision (Weighted): 0.8020
-   Recall (Weighted): 0.7874
-   F1-Score (Weighted): 0.7567
-   Training Time: 121.47 seconds
-   Prediction Time: 0.01 seconds
-
-6. Neural Network
+4. Neural Network
 ----------------------------------------
    Model Type: MLPClassifier
-   accuracy: 0.7774
-   Precision (Macro): 0.9063
-   Recall (Macro): 0.5244
-   F1-Score (Macro): 0.5663
-   Precision (Weighted): 0.8105
-   Recall (Weighted): 0.7774
-   F1-Score (Weighted): 0.7066
-   Training Time: 146.43 seconds
-   Prediction Time: 0.17 seconds
+   accuracy: 0.9615
+   Precision (Macro): 0.8923
+   Recall (Macro): 0.7550
+   F1-Score (Macro): 0.7951
+   Precision (Weighted): 0.9675
+   Recall (Weighted): 0.9615
+   F1-Score (Weighted): 0.9626
+   Training Time: 1039.81 seconds
+   Prediction Time: 0.45 seconds
+
+5. AdaBoost
+----------------------------------------
+   Model Type: AdaBoostClassifier
+   accuracy: 0.9447
+   Precision (Macro): 0.5786
+   Recall (Macro): 0.5259
+   F1-Score (Macro): 0.5447
+   Precision (Weighted): 0.9452
+   Recall (Weighted): 0.9447
+   F1-Score (Weighted): 0.9396
+   Training Time: 156.46 seconds
+   Prediction Time: 3.85 seconds
+
+6. Logistic Regression
+----------------------------------------
+   Model Type: LogisticRegression
+   accuracy: 0.8675
+   Precision (Macro): 0.5316
+   Recall (Macro): 0.4495
+   F1-Score (Macro): 0.4807
+   Precision (Weighted): 0.8696
+   Recall (Weighted): 0.8675
+   F1-Score (Weighted): 0.8605
+   Training Time: 245.25 seconds
+   Prediction Time: 0.03 seconds
 
 7. Naive Bayes
 ----------------------------------------
    Model Type: GaussianNB
-   accuracy: 0.3418
-   Precision (Macro): 0.5295
-   Recall (Macro): 0.5754
-   F1-Score (Macro): 0.4318
-   Precision (Weighted): 0.7556
-   Recall (Weighted): 0.3418
-   F1-Score (Weighted): 0.2961
-   Training Time: 0.22 seconds
-   Prediction Time: 0.12 seconds
+   accuracy: 0.3401
+   Precision (Macro): 0.3442
+   Recall (Macro): 0.5647
+   F1-Score (Macro): 0.2350
+   Precision (Weighted): 0.8154
+   Recall (Weighted): 0.3401
+   F1-Score (Weighted): 0.2539
+   Training Time: 4.68 seconds
+   Prediction Time: 0.25 seconds
 
 ================================================================================
 BEST MODELS BY CATEGORY
 ================================================================================
 
-Best accuracy: Random Forest (0.9947)
-Best F1-Score: Random Forest (0.9897)
-Fastest Training: Naive Bayes (0.22s)
-Fastest Prediction: Logistic Regression (0.01s)
+Best accuracy: Random Forest (0.9973)
+Best F1-Score: Neural Network (0.7951)
+Fastest Training: Naive Bayes (4.68s)
+Fastest Prediction: Logistic Regression (0.03s)
